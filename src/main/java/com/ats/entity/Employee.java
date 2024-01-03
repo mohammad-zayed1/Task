@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,10 +18,6 @@ public class Employee {
     @Column(name = "EMPLOYEE_ID")
     @JsonProperty("id")
     private Long id;
-
-    @Column(name = "TASKS")
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Task> tasks;
 
     @Column(name = "FIRST_NAME")
     @JsonProperty("firstName")
@@ -39,18 +36,20 @@ public class Employee {
 
     @Column(name = "CREATION_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
     @JsonProperty("creationDate")
+    @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDateTime creationDate;
 
     @Column(name = "UPDATE_DATE")
     @Temporal(TemporalType.TIMESTAMP)
-    @UpdateTimestamp
     @JsonProperty("updateDate")
+    @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDateTime updateDate;
 
+    @OneToMany
+     public  List<Task> tasks = new ArrayList<Task>();
 
     public Long getId() {
         return id;
@@ -107,4 +106,6 @@ public class Employee {
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
+
+
 }

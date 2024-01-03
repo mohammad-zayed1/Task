@@ -19,9 +19,7 @@ public class Task {
     @JsonProperty("id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
-    private Employee employee;
+     private Long employeeId;
 
     @Column(name = "DESCRIPTION")
     @JsonProperty("description")
@@ -32,8 +30,62 @@ public class Task {
     private TaskStatus status;
 
     @Column(name = "CREATION_DATE")
-    private Timestamp creationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDateTime creationDate;
 
     @Column(name = "DUE_DATE")
-    private Timestamp dueDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDateTime dueDate;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public TaskStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TaskStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
+    }
 }

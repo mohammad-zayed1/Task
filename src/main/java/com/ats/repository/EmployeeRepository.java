@@ -1,7 +1,9 @@
 package com.ats.repository;
 
 import com.ats.entity.Employee;
+import com.ats.entity.Task;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
+import io.quarkus.panache.common.Parameters;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -49,4 +51,18 @@ public class EmployeeRepository implements PanacheRepository<Employee> {
         }
         return Response.status(Response.Status.NOT_FOUND).entity("employee with id : " + id + " not exist").build();
     }
+//    @Transactional
+//    public void deleteTaskByEmpId(Long taskId , Long empId){
+//         delete("id=:empId and tasks.id=:taskId",
+//                Parameters.with("empId",empId).and("taskId",taskId));
+//
+//    }
+
+//    @Transactional
+//    public void addTask(Long employeeId, Task task) {
+//        Employee employee = findById(employeeId);
+//        if (employee != null) {
+//         employee.tasks.add(task);
+//        }
+//    }
 }
